@@ -15,13 +15,25 @@ class GameOver extends Phaser.Scene {
         let background = this.add.image(0, 0, "background").setOrigin(0, 0);
         background.setDisplaySize(game.config.width, game.config.height);
 
-        my.sprite.skull = this.add.sprite(game.config.width/2, game.config.height/2, "skull");
+        my.sprite.skull = this.add.sprite(game.config.width/2, game.config.height/2 - 265, "skull");
         my.sprite.skull.setScale(11);
 
         my.text.GameOverText = this.add.text(game.config.width/2, game.config.height/2 - 150, "Game Over!", {
             fontFamily: 'Times, serif',
             fontSize: 80,
             color: '#ff0000'
+        }).setOrigin(0.5);
+
+        let recentScore = this.registry.get('latestScore');
+        my.text.recentScoreText = this.add.text(game.config.width/2, game.config.height/2 - 25, "Your Score: " + recentScore, {
+            fontFamily: 'Times, serif',
+            fontSize: 40,
+        }).setOrigin(0.5);
+
+        let highScore = this.registry.get('HighScore');
+        my.text.highestScoreText = this.add.text(game.config.width/2, game.config.height/2 + 25, "High Score: " + highScore, {
+            fontFamily: 'Times, serif',
+            fontSize: 30,
         }).setOrigin(0.5);
 
         //play again button

@@ -14,7 +14,7 @@ class Credits extends Phaser.Scene {
         let background = this.add.image(0, 0, "background").setOrigin(0, 0);
         background.setDisplaySize(game.config.width, game.config.height);
 
-        let creditsStr = "Art & Audio Assets:     Kenny Assets\n\n\nGame developed by:     Tristan Chen";
+        let creditsStr = "Art & Audio Assets:     https://kenney.nl/assets\n\n\nGame developed by:     Tristan Chen";
 
         my.text.Title = this.add.text(game.config.width/2, game.config.height/2 - 250, "Credits", {
             fontFamily: 'Times, serif',

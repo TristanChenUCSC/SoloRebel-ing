@@ -512,6 +512,8 @@ class Level extends Phaser.Scene {
         my.text.livesText.setText("Lives: " + this.lives);
         if (this.lives <= 0) {
             this.time.delayedCall(650, () => {
+                this.registry.set('latestScore', this.score);
+                this.registry.set('HighScore', this.highscore);
                 this.resetGame();
                 this.scene.start("gameOverScene");
             });
