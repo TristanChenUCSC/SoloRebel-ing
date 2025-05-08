@@ -10,6 +10,7 @@ class Level extends Phaser.Scene {
         //Lives, Score, and other UI stuff
         this.lives = 3;
         this.score = 0;
+        this.highscore = 0;
 
         //Player bullet settings
         this.my.sprite.bullet = [];   
@@ -55,15 +56,11 @@ class Level extends Phaser.Scene {
 
     preload() {
         this.load.setPath("./assets/");
-        this.load.image("background", "blue.png");
 
         this.load.image("player", "playerShip1_blue.png");
         this.load.image("laser", "laserGreen12.png");
         this.load.image("enemyLaser", "laserRed06.png");
         this.load.image("bigEnemyLaser", "laserRed11.png");
-        this.load.image("fighter", "spaceShips_001.png");
-        this.load.image("bomber", "spaceShips_006.png");
-        this.load.image("juggernaut", "spaceShips_007.png");
         
         //explosion animations
         this.load.image("explosion00", "explosion00.png");
@@ -152,10 +149,15 @@ class Level extends Phaser.Scene {
             fontSize: 40,
         });
 
-        my.text.newWaveText = this.add.text(game.config.width/2 - 140, game.config.height/2, "New Wave Incoming!!!", {
+        my.text.highScoreText = this.add.text(10, 50, "High Score: " + this.highscore, {
+            fontFamily: 'Times, serif',
+            fontSize: 18,
+        });
+
+        my.text.newWaveText = this.add.text(game.config.width/2, game.config.height/2, "New Wave Incoming!!!", {
             fontFamily: 'Times, serif',
             fontSize: 40,
-        });
+        }).setOrigin(0.5);
         my.text.newWaveText.visible = false;
     }
 
@@ -202,6 +204,10 @@ class Level extends Phaser.Scene {
                         fighter.visible = false;
                         this.score += 100;
                         my.text.scoreText.setText("Score: " + this.score);
+                        if (this.score >= this.highscore) {
+                            this.highscore = this.score;
+                            my.text.highScoreText.setText("High Score: " + this.highscore);
+                        }
                         this.sound.play("explosion", {
                             volume: 1
                         });
@@ -228,6 +234,10 @@ class Level extends Phaser.Scene {
                             juggernaut.visible = false;
                             this.score += 1000;
                             my.text.scoreText.setText("Score: " + this.score);
+                            if (this.score >= this.highscore) {
+                                this.highscore = this.score;
+                                my.text.highScoreText.setText("High Score: " + this.highscore);
+                            }
                             this.sound.play("explosion", {
                                 volume: 1
                             });
@@ -243,6 +253,10 @@ class Level extends Phaser.Scene {
                         bomber.visible = false;
                         this.score += 500;
                         my.text.scoreText.setText("Score: " + this.score);
+                        if (this.score >= this.highscore) {
+                            this.highscore = this.score;
+                            my.text.highScoreText.setText("High Score: " + this.highscore);
+                        }
                         this.sound.play("explosion", {
                             volume: 1
                         });
@@ -449,6 +463,10 @@ class Level extends Phaser.Scene {
             this.waitingForWave = true;
             this.score += 5000;
             my.text.scoreText.setText("Score: " + this.score);
+            if (this.score >= this.highscore) {
+                this.highscore = this.score;
+                my.text.highScoreText.setText("High Score: " + this.highscore);
+            }
             my.text.newWaveText.visible = true;
 
             this.time.delayedCall(3000, () => {

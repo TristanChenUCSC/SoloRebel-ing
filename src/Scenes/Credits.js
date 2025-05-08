@@ -1,12 +1,11 @@
-class GameOver extends Phaser.Scene {
+class Credits extends Phaser.Scene {
     constructor() {
-        super("gameOverScene");
+        super("creditsScene");
         this.my = {sprite: {}, text: {}};
     }
 
     preload() {
         this.load.setPath("./assets/");
-        this.load.image("skull", "tile_0122.png");
     }
 
     create() {
@@ -15,34 +14,24 @@ class GameOver extends Phaser.Scene {
         let background = this.add.image(0, 0, "background").setOrigin(0, 0);
         background.setDisplaySize(game.config.width, game.config.height);
 
-        my.sprite.skull = this.add.sprite(game.config.width/2, game.config.height/2, "skull");
-        my.sprite.skull.setScale(11);
+        let creditsStr = "Art & Audio Assets:     Kenny Assets\n\n\nGame developed by:     Tristan Chen";
 
-        my.text.GameOverText = this.add.text(game.config.width/2, game.config.height/2 - 150, "Game Over!", {
+        my.text.Title = this.add.text(game.config.width/2, game.config.height/2 - 250, "Credits", {
             fontFamily: 'Times, serif',
-            fontSize: 80,
-            color: '#ff0000'
+            fontSize: 100,
+            color: '#00BFFF'
         }).setOrigin(0.5);
 
-        //play again button
-        my.text.playAgain = this.add.text(game.config.width/2, 500, "Play Again?", {
+        my.text.creditsText = this.add.text(game.config.width/2, game.config.height/2 - 100, creditsStr, {
             fontFamily: 'Times, serif',
-            fontSize: 40,
-            color: '#1E90FF'
-        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
-        
-        my.text.playAgain.on('pointerdown', () => {
-            this.scene.start("levelScene");
-        });
+            fontSize: 26,
+        }).setOrigin(0.5);
 
-        my.text.playAgain.on('pointerover', () => {
-            my.text.playAgain.setStyle({ fill: '#87CEFA' });
-        });
-        my.text.playAgain.on('pointerout', () => {
-            my.text.playAgain.setStyle({ fill: '#1E90FF' });
-        });
+        my.text.creditsText = this.add.text(game.config.width/2, game.config.height/2 + 100, "Made with Phaser Framework", {
+            fontFamily: 'Times, serif',
+            fontSize: 26,
+        }).setOrigin(0.5);
 
-        //return to menu button
         my.text.returnToMenu = this.add.text(game.config.width/2, 600, "Return to Menu", {
             fontFamily: 'Times, serif',
             fontSize: 30,
@@ -59,7 +48,6 @@ class GameOver extends Phaser.Scene {
         my.text.returnToMenu.on('pointerout', () => {
             my.text.returnToMenu.setStyle({ fill: '#1E90FF' });
         });
-
     }
 
     update() {
